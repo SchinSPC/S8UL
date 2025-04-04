@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLEND S8UL - Premium Clothing Brand</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../assets/1.png" alt="BLEND S8UL">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#featured">Shop</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="cart.html" class="cart-icon">Cart (<span id="cart-count">0</span>) - ₹<span id="cart-total">0</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <h1>Welcome to BLEND S8UL</h1>
+        <p>Discover premium quality clothing that combines style, comfort, and durability. Shop our latest collection today!</p>
+        <a href="#featured" class="cta-button">Shop Now</a>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section id="featured" class="featured">
+        <h2>Featured Products</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="S8UL Hoodie">
+                <h3>S8UL Hoodie</h3>
+                <p>₹999</p>
+                <button onclick="addToCart('hoodie', 'S8UL Hoodie', 999)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1522609517675-6840f040c6a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="S8UL T-Shirt">
+                <h3>S8UL T-Shirt</h3>
+                <p>₹599</p>
+                <button onclick="addToCart('tshirt', 'S8UL T-Shirt', 599)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="../assets/products/6.png" alt="S8UL X CAP ">
+                <h3>S8UL Cap</h3>
+                <p>₹399</p>
+                <button onclick="addToCart('cap', 'S8UL X Cap', 399)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="S8UL Sneakers">
+                <h3>S8UL Sneakers</h3>
+                <p>₹1999</p>
+                <button onclick="addToCart('sneakers', 'S8UL Sneakers', 1999)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="S8UL Backpack">
+                <h3>S8UL Backpack</h3>
+                <p>₹1299</p>
+                <button onclick="addToCart('backpack', 'S8UL Backpack', 1299)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="S8UL Water Bottle">
+                <h3>S8UL Water Bottle</h3>
+                <p>₹499</p>
+                <button onclick="addToCart('bottle', 'S8UL Water Bottle', 499)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="../assets/products/1.png" alt="S8UL Classic T-Shirt">
+                <h3>S8UL Classic T-Shirt</h3>
+                <p>₹399</p>
+                <button onclick="addToCart('OK-tshirt', 'S8UL Classic T-Shirt', 399)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="../assets/products/2.png" alt="S8UL Classic Savage">
+                <h3>S8UL Classic Savage</h3>
+                <p>₹399</p>
+                <button onclick="addToCart('savage', 'S8UL Classic Savage', 399)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="../assets/products/3.png" alt="S8UL Classic ">
+                <h3>S8UL Small Logo T-Shirt</h3>
+                <p>₹399</p>
+                <button onclick="addToCart('small', 'S8UL Small Logo T-Shirt', 399)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="../assets/products/4.png" alt="S8UL Classic ">
+                <h3>S8UL ALEXIA</h3>
+                <p>₹399</p>
+                <button onclick="addToCart('alexia', 'S8UL ALEXIA', 399)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="../assets/products/5.png" alt="S8UL Classic ">
+                <h3>S8UL HOPE</h3>
+                <p>₹399</p>
+                <button onclick="addToCart('hope', 'S8UL HOPE', 399)">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About BLEND S8UL</h2>
+        <p>BLEND S8UL is a premium clothing brand that combines style, comfort, and quality. Our mission is to provide high-quality apparel that reflects your unique personality and lifestyle. Each piece in our collection is carefully crafted with attention to detail and made from the finest materials.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 BLEND S8UL. All rights reserved.</p>
+    </footer>
+
+    <script src="./script.js"></script>
+</body>
+</html>
