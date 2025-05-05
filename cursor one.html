@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - BLEND S8UL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .cart-container {
+            max-width: 1400px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .left-column {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .cart-items {
+            margin-bottom: 30px;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 120px 1fr auto;
+            gap: 20px;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .cart-item-details h3 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .cart-item-price {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .quantity-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            font-size: 1rem;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 5px;
+            align-self: flex-start;
+        }
+
+        .save-for-later {
+            background: none;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            width: fit-content;
+        }
+
+        .save-for-later:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Right Column Styles */
+        .checkout-section {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .order-summary {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            font-size: 1rem;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .total {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid #eee;
+        }
+
+        .coupon-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .coupon-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .coupon-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .coupon-input button {
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .shipping-options {
+            margin: 20px 0;
+        }
+
+        .shipping-option {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .shipping-option:hover {
+            border-color: var(--primary-color);
+        }
+
+        .shipping-option.selected {
+            border-color: var(--secondary-color);
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .payment-section {
+            margin-top: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .payment-method {
+            background: var(--white);
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-method.selected {
+            border-color: var(--secondary-color);
+            background: rgba(231, 76, 60, 0.05);
+        }
+
+        .payment-method img {
+            width: 80px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .payment-method p {
+            margin: 0;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .checkout-btn {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 20px;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.2);
+        }
+
+        .checkout-btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 50px;
+            grid-column: 1 / -1;
+        }
+
+        .empty-cart h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .continue-shopping {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: var(--transition);
+        }
+
+        .continue-shopping:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 1024px) {
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+
+            .checkout-section {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cart-item {
+                grid-template-columns: 100px 1fr;
+            }
+
+            .remove-item {
+                grid-column: 2;
+                justify-self: end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="./assets/logo.png" alt="BLEND S8UL" width="30px">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#featured">Shop</a></li>
+                    <li><a class="active" href="cart.html" class="cart-icon">Cart (<span id="cart-count">0</span>) - ₹<span id="cart-total">0</span></a></li>
+                    <li><a href="sell.html" class="sell-button">Sell</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="cart-container">
+        <!-- Left Column - Cart Items -->
+        <div class="left-column">
+            <h1>Your Shopping Cart</h1>
+            <div id="cart-content">
+                <!-- Cart items will be dynamically inserted here -->
+            </div>
+
+            <div class="saved-items" id="saved-items">
+                <h2>Saved for Later</h2>
+                <div id="saved-items-content">
+                    <!-- Saved items will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Checkout Section -->
+        <div class="checkout-section">
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="subtotal">₹0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span id="shipping">₹0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Discount</span>
+                    <span id="discount">-₹0</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="total">₹0</span>
+                </div>
+            </div>
+
+            <div class="coupon-section">
+                <h3>Apply Coupon</h3>
+                <div class="coupon-input">
+                    <input type="text" id="coupon-code" placeholder="Enter coupon code">
+                    <button onclick="applyCoupon()">Apply</button>
+                </div>
+                <p id="coupon-message"></p>
+            </div>
+
+            <div class="shipping-options">
+                <h3>Shipping Options</h3>
+                <div class="shipping-option" onclick="selectShipping('standard')">
+                    <span>Standard Shipping</span>
+                    <span>₹50 per item</span>
+                </div>
+                <div class="shipping-option" onclick="selectShipping('express')">
+                    <span>Express Shipping</span>
+                    <span>₹100 per item</span>
+                </div>
+            </div>
+
+            <div class="payment-section">
+                <h3>Payment Method</h3>
+                <div class="payment-methods">
+                    <div class="payment-method" onclick="selectPayment('razorpay')">
+                        <img src="https://th.bing.com/th/id/OIP.3915OPu9nRGi5zVY36VyQgHaFj?rs=1&pid=ImgDetMain" alt="Razorpay">
+                        <p>Razorpay</p>
+                    </div>
+                    <div class="payment-method" onclick="selectPayment('stripe')">
+                        <img src="https://logos-world.net/wp-content/uploads/2021/03/Stripe-Emblem.png" alt="Stripe">
+                        <p>Stripe</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay">
+        <div class="loading-hoodie"></div>
+    </div>
+
+    <!-- Seller Popup -->
+    <div id="sellerPopup" class="popup-overlay">
+        <div class="custom-popup">
+            <img src="../assets/logo1.png" alt="BLEND S8UL" class="popup-logo">
+            <h3 class="popup-title">Seller Verification</h3>
+            <p class="popup-message">This section is exclusively for sellers. Are you a seller?</p>
+            <div class="popup-buttons">
+                <button class="popup-btn confirm" onclick="handleSellerConfirm()">Yes, I'm a Seller</button>
+                <button class="popup-btn cancel" onclick="handleSellerCancel()">No, I'm a Buyer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+    <script>
+        // Function to display cart items
+        function displayCartItems() {
+            const cartContent = document.getElementById('cart-content');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+
+            if (cart.length === 0) {
+                cartContent.innerHTML = `
+                    <div class="empty-cart">
+                        <h2>Your cart is empty</h2>
+                        <a href="./shop.html" class="continue-shopping">Continue Shopping</a>
+                    </div>
+                `;
+                updateOrderSummary(0, 0, 0);
+                return;
+            }
+
+            let subtotal = 0;
+            const itemsHTML = cart.map((item, index) => {
+                subtotal += item.price * item.quantity;
+                const imageUrl = getProductImage(item.id);
+                return `
+                    <div class="cart-item">
+                        <img src="${imageUrl}" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <h3>${item.name}</h3>
+                            <p class="cart-item-price">₹${item.price}</p>
+                            <div class="quantity-control">
+                                <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity}" 
+                                    min="1" onchange="updateQuantity(${index}, 0, this.value)">
+                                <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                            </div>
+                            <button class="save-for-later" onclick="saveForLater(${index})">Save for Later</button>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${index})">×</button>
+                    </div>
+                `;
+            }).join('');
+
+            const shippingCost = calculateShipping(cart);
+            const discount = calculateDiscount();
+            const total = subtotal + shippingCost - discount;
+
+            cartContent.innerHTML = `
+                <div class="cart-items">
+                    ${itemsHTML}
+                </div>
+            `;
+
+            updateOrderSummary(subtotal, shippingCost, discount, total);
+            displaySavedItems(savedItems);
+        }
+
+        function getProductImage(productId) {
+            const imageMap = {
+                'hoodie': '../assets/products/9.jpg',
+                'tshirt': '../assets/products/3.jpg',
+                'cap': '../assets/products/6.jpg',
+                'backpack': '../assets/products/7.jpg',
+                'bottle': '../assets/products/8.jpg',
+                'OK-tshirt': '../assets/products/1.jpg',
+                'savage': '../assets/products/2.jpg',
+                'small': '../assets/products/10.jpg',
+                'alexia': '../assets/products/11.jpg',
+                'Unity Jacket': '../assets/products/11.jpg',
+                'Cheque Shirt': '../assets/products/12.jpg'
+            };
+            return imageMap[productId] || '../assets/products/default.jpg';
+        }
+
+        function displaySavedItems(savedItems) {
+            const savedItemsContent = document.getElementById('saved-items-content');
+            if (savedItems.length === 0) {
+                savedItemsContent.innerHTML = '<p style="text-align: center; color: #666;">No items saved for later</p>';
+                return;
+            }
+
+            const itemsHTML = savedItems.map((item, index) => {
+                const imageUrl = getProductImage(item.id);
+                return `
+                    <div class="cart-item">
+                        <img src="${imageUrl}" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <h3>${item.name}</h3>
+                            <p class="cart-item-price">₹${item.price}</p>
+                            <button class="save-for-later" onclick="moveToCart(${index})">Move to Cart</button>
+                        </div>
+                        <button class="remove-item" onclick="removeFromSaved(${index})">×</button>
+                    </div>
+                `;
+            }).join('');
+
+            savedItemsContent.innerHTML = itemsHTML;
+        }
+
+        function updateQuantity(index, change, newValue) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (newValue !== undefined) {
+                cart[index].quantity = parseInt(newValue);
+            } else {
+                cart[index].quantity += change;
+            }
+            if (cart[index].quantity < 1) cart[index].quantity = 1;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+            updateCartCount();
+        }
+
+        function saveForLater(index) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+            
+            savedItems.push(cart[index]);
+            cart.splice(index, 1);
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('savedItems', JSON.stringify(savedItems));
+            
+            displayCartItems();
+            updateCartCount();
+            showNotification('Item saved for later');
+        }
+
+        function moveToCart(index) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+            
+            cart.push(savedItems[index]);
+            savedItems.splice(index, 1);
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('savedItems', JSON.stringify(savedItems));
+            
+            displayCartItems();
+            updateCartCount();
+            showNotification('Item moved to cart');
+        }
+
+        function removeFromSaved(index) {
+            const savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+            savedItems.splice(index, 1);
+            localStorage.setItem('savedItems', JSON.stringify(savedItems));
+            displayCartItems();
+        }
+
+        function calculateShipping(cart) {
+            // Simple shipping calculation based on number of items
+            return cart.length * 50; // ₹50 per item
+        }
+
+        function calculateDiscount() {
+            const coupon = localStorage.getItem('activeCoupon');
+            if (!coupon) return 0;
+            
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Example coupon logic
+            if (coupon === 'WELCOME10') {
+                return subtotal * 0.1; // 10% discount
+            }
+            if (coupon === 'FREESHIP') {
+                return calculateShipping(cart);
+            }
+            return 0;
+        }
+
+        function applyCoupon() {
+            const couponCode = document.getElementById('coupon-code').value;
+            const validCoupons = ['WELCOME10', 'FREESHIP'];
+            
+            if (validCoupons.includes(couponCode)) {
+                localStorage.setItem('activeCoupon', couponCode);
+                showNotification('Coupon applied successfully!');
+                displayCartItems();
+            } else {
+                document.getElementById('coupon-message').textContent = 'Invalid coupon code';
+            }
+        }
+
+        function selectShipping(method) {
+            localStorage.setItem('shippingMethod', method);
+            displayCartItems();
+        }
+
+        function selectPayment(method) {
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            paymentMethods.forEach(pm => pm.classList.remove('selected'));
+            document.querySelector(`.payment-method[onclick*="${method}"]`).classList.add('selected');
+            localStorage.setItem('paymentMethod', method);
+        }
+
+        async function checkout() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                showNotification('Your cart is empty');
+                return;
+            }
+
+            const paymentMethod = localStorage.getItem('paymentMethod');
+            if (!paymentMethod) {
+                showNotification('Please select a payment method');
+                return;
+            }
+
+            // Calculate total
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shippingCost = calculateShipping(cart);
+            const discount = calculateDiscount();
+            const total = subtotal + shippingCost - discount;
+
+            try {
+                if (paymentMethod === 'razorpay') {
+                    // Initialize Razorpay
+                    const options = {
+                        key: 'YOUR_RAZORPAY_KEY',
+                        amount: total * 100, // amount in paise
+                        currency: 'INR',
+                        name: 'BLEND S8UL',
+                        description: 'Purchase from BLEND S8UL',
+                        handler: function(response) {
+                            showNotification('Payment successful!');
+                            // Clear cart after successful payment
+                            localStorage.removeItem('cart');
+                            localStorage.removeItem('activeCoupon');
+                            displayCartItems();
+                        }
+                    };
+                    const rzp = new Razorpay(options);
+                    rzp.open();
+                } else if (paymentMethod === 'stripe') {
+                    // Initialize Stripe
+                    const stripe = Stripe('YOUR_STRIPE_KEY');
+                    const response = await fetch('/create-checkout-session', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            items: cart,
+                            total: total
+                        }),
+                    });
+                    const session = await response.json();
+                    const result = await stripe.redirectToCheckout({
+                        sessionId: session.id
+                    });
+                }
+            } catch (error) {
+                showNotification('Payment failed. Please try again.');
+                console.error('Payment error:', error);
+            }
+        }
+
+        function updateOrderSummary(subtotal, shippingCost, discount, total) {
+            document.getElementById('subtotal').textContent = `₹${subtotal.toFixed(2)}`;
+            document.getElementById('shipping').textContent = `₹${shippingCost.toFixed(2)}`;
+            document.getElementById('discount').textContent = `-₹${discount.toFixed(2)}`;
+            document.getElementById('total').textContent = `₹${total.toFixed(2)}`;
+        }
+
+        // Initialize cart display when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            displayCartItems();
+            updateCartCount();
+            const savedPaymentMethod = localStorage.getItem('paymentMethod');
+            if (savedPaymentMethod) {
+                selectPayment(savedPaymentMethod);
+            }
+        });
+
+        // Add loading animation for page transitions
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            const links = document.querySelectorAll('a[href]:not([href^="#"])');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Don't show loading for external links
+                    if (this.hostname !== window.location.hostname) return;
+                    
+                    // Special handling for Sell button
+                    if (this.classList.contains('sell-button')) {
+                        e.preventDefault();
+                        showSellerPopup(this.href);
+                        return;
+                    }
+                    
+                    e.preventDefault();
+                    const targetUrl = this.href;
+                    
+                    // Show loading overlay
+                    loadingOverlay.classList.add('active');
+                    
+                    // Simulate loading time (1 second)
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 1000);
+                });
+            });
+        });
+
+        let pendingSellUrl = '';
+
+        function showSellerPopup(url) {
+            pendingSellUrl = url;
+            const popup = document.getElementById('sellerPopup');
+            popup.classList.add('active');
+        }
+
+        function handleSellerConfirm() {
+            const popup = document.getElementById('sellerPopup');
+            popup.classList.remove('active');
+            
+            // Show loading overlay
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            loadingOverlay.classList.add('active');
+            
+            // Simulate loading time (1 second)
+            setTimeout(() => {
+                window.location.href = pendingSellUrl;
+            }, 1000);
+        }
+
+        function handleSellerCancel() {
+            const popup = document.getElementById('sellerPopup');
+            popup.classList.remove('active');
+            pendingSellUrl = '';
+        }
+    </script>
+</body>
+</html> 
