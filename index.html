@@ -5,22 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BLEND S8UL - Premium Clothing Brand</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Header Section -->
     <header>
         <div class="container">
             <div class="logo">
-                <img src="../assets/logo1.png" alt="BLEND S8UL">
+                <img src="assets/logo1.png" alt="BLEND S8UL">
             </div>
             <nav>
                 <ul>
                     <li><a class="active" href="index.html">Home</a></li>
                     <li><a href="shop.html">Shop</a></li>
+                    <li><a href="cart.html" class="cart-icon">Cart (<span id="cart-count">0</span>) - ₹<span id="cart-total">0</span></a></li>
+                    <li><a href="sell.html" class="sell-button">Sell</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a href="../cart.html" class="cart-icon">Cart (<span id="cart-count">0</span>) - ₹<span id="cart-total">0</span></a></li>
                 </ul>
             </nav>
         </div>
@@ -28,7 +29,7 @@
 
     <!-- Hero Section -->
     <section id="hero">
-        <h1>Welcome to S8UL Store</h1>
+        <h1>Welcome to [blend S8UL] Store</h1>
         <p>Discover premium quality clothing that combines style, comfort, and durability. Shop our latest collection today!</p>
         <a href="#featured" class="cta-button">Shop Now</a>
     </section>
@@ -39,66 +40,66 @@
         <div class="product-grid">
             <div class="product-card"onclick="window.location.href='sproduct.html';">
                 
-                <img src="../assets/products/9.jpg" alt="S8UL Classic hoodie">
+                <img src="assets/products/9.jpg" alt="S8UL Classic hoodie">
                 <span>S8UL</span>
                 <h5>S8UL Hoodie</h5>
                 <h4>₹999</h4>
                 <button onclick="addToCart('hoodie', 'S8UL Hoodie', 999)">Add to Cart</button>
             </div>
             <div class="product-card" onclick="window.location.href='2product.html';">
-                <img src="../assets/products/3.jpg" alt="S8UL T-Shirt">
+                <img src="assets/products/3.jpg" alt="S8UL T-Shirt">
                 <span>S8UL</span>
                 <h5>S8UL T-Shirt</h5>
                 <h4>₹599</h4>
                 <button onclick="addToCart('tshirt', 'S8UL T-Shirt', 599)">Add to Cart</button>
             </div>
             <div class="product-card" onclick="window.location.href='3product.html';">
-                <img src="../assets/products/6.jpg" alt="S8UL X CAP ">
+                <img src="assets/products/6.jpg" alt="S8UL X CAP ">
                 <span>S8UL</span>
                 <h5>Cap</h5>
-                <h4>₹399</h4>
-                <button onclick="addToCart('cap', 'S8UL X Cap', 399)">Add to Cart</button>
+                <h4>₹699</h4>
+                <button onclick="addToCart('cap', 'S8UL X Cap', 699)">Add to Cart</button>
             </div>
            
             <div class="product-card" onclick="window.location.href='4product.html';">
-                <img src="../assets/products/7.png"alt="s8ulbackpack">
+                <img src="assets/products/7.jpg"alt="s8ulbackpack">
                 <span>S8UL</span>
-                <h5>Backpack</h5>
+                <h5>Relaxed Fit Hole-knit polo shirt</h5>
                 <h4>₹1299</h4>
                 <button onclick="addToCart('backpack', 'S8UL Backpack', 1299)">Add to Cart</button>
             </div>
             <div class="product-card" onclick="window.location.href='5product.html';">
-                <img src="../assets/products/8.png"alt="s8ul water bottle">
+                <img src="assets/products/8.jpg"alt="s8ul water bottle">
                 <span>S8UL</span>
-                <h5>Water Bottle</h5>
-                <h4>₹499</h4>
-                <button onclick="addToCart('bottle', 'S8UL Water Bottle', 499)">Add to Cart</button>
+                <h5>Regular Fit Corduroy overshirt</h5>
+                <h4>₹1799</h4>
+                <button onclick="addToCart('bottle', 'S8UL Water Bottle', 1799)">Add to Cart</button>
             </div>
             <div class="product-card"onclick="window.location.href='6product.html';">
-                <img src="../assets/products/1.jpg" alt="S8UL Classic T-Shirt">
+                <img src="assets/products/1.jpg" alt="S8UL Classic T-Shirt">
                 <span>S8UL</span>
-                <h5>Women T-Shirt</h5>
-                <h4>₹399</h4>
-                <button onclick="addToCart('OK-tshirt', 'S8UL Women T-Shirt', 399)">Add to Cart</button>
+                <h5>Oversize aesthetic T-Shirt</h5>
+                <h4>₹699</h4>
+                <button onclick="addToCart('OK-tshirt', 'S8UL Women T-Shirt', 699)">Add to Cart</button>
             </div>
-            <div class="product-card">
-                <img src="../assets/products/2.jpg" alt="S8UL Classic Savage">
+            <div class="product-card" onclick="window.location.href='7product.html';">
+                <img src="assets/products/2.jpg" alt="S8UL Classic Savage">
                 <span>S8UL</span>
-                <h5>Women Hoodie</h5>
+                <h5>Summer Shirt</h5>
                 <h4>₹1499</h4>
                 <button onclick="addToCart('savage', 'S8UL Women Hoodie', 1499)">Add to Cart</button>
             </div>
-            <div class="product-card">
-                <img src="../assets/products/10.jpg" alt="S8UL Classic ">
+            <div class="product-card" onclick="window.location.href='8product.html';">
+                <img src="assets/products/10.jpg" alt="S8UL Classic ">
                 <span>S8UL</span>
-                <h5>Small Logo T-Shirt</h5>
-                <h4>₹399</h4>
-                <button onclick="addToCart('small', 'S8UL Small Logo T-Shirt', 399)">Add to Cart</button>
+                <h5>That black leather look</h5>
+                <h4>₹3999</h4>
+                <button onclick="addToCart('small', 'S8UL Small Logo T-Shirt', 3999)">Add to Cart</button>
             </div>
-            <div class="product-card">
-                <img src="../assets/products/11.jpg" alt="S8UL Classic ">
+            <div class="product-card"onclick="window.location.href='9product.html';">
+                <img src="assets/products/11.jpg" alt="S8UL Classic ">
                 <span>S8UL</span>
-                <h5>Full Sleeve T-Shirt</h5>
+                <h5>Unity Jacket</h5>
                 <h4>₹1399</h4>
                 <button onclick="addToCart('alexia', 'S8UL Full Sleeve T-Shirt', 1399)">Add to Cart</button>
             </div>
@@ -110,6 +111,87 @@
         <p>&copy; 2025 BLEND S8UL. All rights reserved.</p>
     </footer>
 
-    <script src="../script.js"></script>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay">
+        <div class="loading-hoodie"></div>
+    </div>
+
+    <!-- Custom Popup -->
+    <div class="popup-overlay" id="sellerPopup">
+        <div class="custom-popup">
+            <img src="assets/logo1.png" alt="BLEND S8UL" class="popup-logo">
+            <h2 class="popup-title">BLEND S8UL</h2>
+            <p class="popup-message">This section is exclusively for sellers. Are you a seller?</p>
+            <div class="popup-buttons">
+                <button class="popup-btn confirm" onclick="handleSellerConfirm()">Yes, I'm a Seller</button>
+                <button class="popup-btn cancel" onclick="handleSellerCancel()">No, I'm a Buyer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Add loading animation for page transitions
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            const loadingHoodie = document.querySelector('.loading-hoodie');
+            const links = document.querySelectorAll('a[href]:not([href^="#"])');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Don't show loading for external links
+                    if (this.hostname !== window.location.hostname) {
+                        return;
+                    }
+                    
+                    // Special handling for Sell button
+                    if (this.classList.contains('sell-button')) {
+                        e.preventDefault();
+                        showSellerPopup(this.href);
+                        return;
+                    }
+                    
+                    e.preventDefault();
+                    const targetUrl = this.href;
+                    
+                    // Show loading overlay
+                    loadingOverlay.classList.add('active');
+                    
+                    // Simulate loading time (1 second)
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 1000);
+                });
+            });
+        });
+
+        let pendingSellUrl = '';
+
+        function showSellerPopup(url) {
+            pendingSellUrl = url;
+            const popup = document.getElementById('sellerPopup');
+            popup.classList.add('active');
+        }
+
+        function handleSellerConfirm() {
+            const popup = document.getElementById('sellerPopup');
+            popup.classList.remove('active');
+            
+            // Show loading overlay
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            loadingOverlay.classList.add('active');
+            
+            // Simulate loading time (1 second)
+            setTimeout(() => {
+                window.location.href = pendingSellUrl;
+            }, 1000);
+        }
+
+        function handleSellerCancel() {
+            const popup = document.getElementById('sellerPopup');
+            popup.classList.remove('active');
+            pendingSellUrl = '';
+        }
+    </script>
 </body>
 </html>

@@ -343,15 +343,16 @@
     <header>
         <div class="container">
             <div class="logo">
-                <img src="../assets/1.png" alt="BLEND S8UL" height="60px">
+                <img src="./assets/logo.png" alt="BLEND S8UL" width="30px">
             </div>
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="index.html#featured">Shop</a></li>
-                    <li><a href="index.html#about">About Us</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
-                    <li><a href="cart.html" class="cart-icon">Cart (<span id="cart-count">0</span>) - ₹<span id="cart-total">0</span></a></li>
+                    <li><a class="active" href="cart.html" class="cart-icon">Cart (<span id="cart-count">0</span>) - ₹<span id="cart-total">0</span></a></li>
+                    <li><a href="sell.html" class="sell-button">Sell</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -420,17 +421,35 @@
                 <h3>Payment Method</h3>
                 <div class="payment-methods">
                     <div class="payment-method" onclick="selectPayment('razorpay')">
-                        <img src="../assets/payment/razorpay.png" alt="Razorpay">
+                        <img src="https://th.bing.com/th/id/OIP.3915OPu9nRGi5zVY36VyQgHaFj?rs=1&pid=ImgDetMain" alt="Razorpay">
                         <p>Razorpay</p>
                     </div>
                     <div class="payment-method" onclick="selectPayment('stripe')">
-                        <img src="../assets/payment/stripe.png" alt="Stripe">
+                        <img src="https://logos-world.net/wp-content/uploads/2021/03/Stripe-Emblem.png" alt="Stripe">
                         <p>Stripe</p>
                     </div>
                 </div>
             </div>
 
             <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay">
+        <div class="loading-hoodie"></div>
+    </div>
+
+    <!-- Seller Popup -->
+    <div id="sellerPopup" class="popup-overlay">
+        <div class="custom-popup">
+            <img src="../assets/logo1.png" alt="BLEND S8UL" class="popup-logo">
+            <h3 class="popup-title">Seller Verification</h3>
+            <p class="popup-message">This section is exclusively for sellers. Are you a seller?</p>
+            <div class="popup-buttons">
+                <button class="popup-btn confirm" onclick="handleSellerConfirm()">Yes, I'm a Seller</button>
+                <button class="popup-btn cancel" onclick="handleSellerCancel()">No, I'm a Buyer</button>
+            </div>
         </div>
     </div>
 
@@ -446,7 +465,7 @@
                 cartContent.innerHTML = `
                     <div class="empty-cart">
                         <h2>Your cart is empty</h2>
-                        <a href="index.html" class="continue-shopping">Continue Shopping</a>
+                        <a href="./shop.html" class="continue-shopping">Continue Shopping</a>
                     </div>
                 `;
                 updateOrderSummary(0, 0, 0);
@@ -492,19 +511,19 @@
 
         function getProductImage(productId) {
             const imageMap = {
-                'hoodie': '../assets/products/9.png',
-                'tshirt': '../assets/products/3.png',
-                'cap': '../assets/products/6.png" alt="S8UL X CAP ',
-                'sneakers': 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-                'backpack': 'assets/products/7.png',
-                'bottle': '../assets/products/8.png',
-                'OK-tshirt' : '../assets/products/1.png',
-                'savage' : '../assets/products/2.png',
-                'small' : '../assets/products/3.png',
-                'alexia' : '../assets/products/4.png',
-                'hope' : '../assets/products/5.png'
-                };
-            return imageMap[productId] || 'default-image.jpg';
+                'hoodie': '../assets/products/9.jpg',
+                'tshirt': '../assets/products/3.jpg',
+                'cap': '../assets/products/6.jpg',
+                'backpack': '../assets/products/7.jpg',
+                'bottle': '../assets/products/8.jpg',
+                'OK-tshirt': '../assets/products/1.jpg',
+                'savage': '../assets/products/2.jpg',
+                'small': '../assets/products/10.jpg',
+                'alexia': '../assets/products/11.jpg',
+                'Unity Jacket': '../assets/products/11.jpg',
+                'Cheque Shirt': '../assets/products/12.jpg'
+            };
+            return imageMap[productId] || '../assets/products/default.jpg';
         }
 
         function displaySavedItems(savedItems) {
@@ -707,6 +726,65 @@
                 selectPayment(savedPaymentMethod);
             }
         });
+
+        // Add loading animation for page transitions
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            const links = document.querySelectorAll('a[href]:not([href^="#"])');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Don't show loading for external links
+                    if (this.hostname !== window.location.hostname) return;
+                    
+                    // Special handling for Sell button
+                    if (this.classList.contains('sell-button')) {
+                        e.preventDefault();
+                        showSellerPopup(this.href);
+                        return;
+                    }
+                    
+                    e.preventDefault();
+                    const targetUrl = this.href;
+                    
+                    // Show loading overlay
+                    loadingOverlay.classList.add('active');
+                    
+                    // Simulate loading time (1 second)
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 1000);
+                });
+            });
+        });
+
+        let pendingSellUrl = '';
+
+        function showSellerPopup(url) {
+            pendingSellUrl = url;
+            const popup = document.getElementById('sellerPopup');
+            popup.classList.add('active');
+        }
+
+        function handleSellerConfirm() {
+            const popup = document.getElementById('sellerPopup');
+            popup.classList.remove('active');
+            
+            // Show loading overlay
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            loadingOverlay.classList.add('active');
+            
+            // Simulate loading time (1 second)
+            setTimeout(() => {
+                window.location.href = pendingSellUrl;
+            }, 1000);
+        }
+
+        function handleSellerCancel() {
+            const popup = document.getElementById('sellerPopup');
+            popup.classList.remove('active');
+            pendingSellUrl = '';
+        }
     </script>
 </body>
 </html> 

@@ -16,11 +16,12 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../shop.html">Shop</a></li>
+                    <li><a href="../cart.html" class="cart-icon">Cart (<span id="cart-count">0</span>) - ₹<span id="cart-total">0</span></a></li>
+                    <li><a href="../sell.html" class="sell-button">Sell</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a class="active" href="contact.html">Contact</a></li>
-                    <li><a href="../cart.html" class="cart-icon">Cart (<span id="cart-count">0</span>) - ₹<span id="cart-total">0</span></a></li>
                 </ul>
             </nav>
         </div>
@@ -29,6 +30,9 @@
     <!-- Contact Section -->
     <section id="contact">
         <h2>Contact Us</h2>
+        <div class="contact-info">
+            <p class="response-time">After raising your problem, we will respond to you within 2-3 working days.</p>
+        </div>
         <form>
             <input type="text" placeholder="Your Name" required>
             <input type="email" placeholder="Your Email" required>
@@ -42,6 +46,149 @@
         <p>&copy; 2025 BLEND S8UL. All rights reserved.</p>
     </footer>
 
-    <script src="../script.js"></script>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay">
+        <div class="loading-hoodie"></div>
+    </div>
+
+    <script>
+        // Add loading animation for page transitions
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            const links = document.querySelectorAll('a[href]:not([href^="#"])');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Don't show loading for external links
+                    if (this.hostname !== window.location.hostname) return;
+                    
+                    // Special handling for Sell button
+                    if (this.classList.contains('sell-button')) {
+                        e.preventDefault();
+                        showSellerPopup(this.href);
+                        return;
+                    }
+                    
+                    e.preventDefault();
+                    const targetUrl = this.href;
+                    
+                    // Show loading overlay
+                    loadingOverlay.classList.add('active');
+                    
+                    // Simulate loading time (1 second)
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 1000);
+                });
+            });
+        });
+
+        let pendingSellUrl = '';
+
+        function showSellerPopup(url) {
+            pendingSellUrl = url;
+            const popup = document.getElementById('sellerPopup');
+            popup.classList.add('active');
+        }
+
+        function handleSellerConfirm() {
+            const popup = document.getElementById('sellerPopup');
+            popup.classList.remove('active');
+            
+            // Show loading overlay
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            loadingOverlay.classList.add('active');
+            
+            // Simulate loading time (1 second)
+            setTimeout(() => {
+                window.location.href = pendingSellUrl;
+            }, 1000);
+        }
+
+        function handleSellerCancel() {
+            const popup = document.getElementById('sellerPopup');
+            popup.classList.remove('active');
+            pendingSellUrl = '';
+        }
+    </script>
+
+    <style>
+        #contact {
+            max-width: 800px;
+            margin: 120px auto 50px;
+            padding: 0 20px;
+        }
+
+        #contact h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .response-time {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 15px;
+            background-color: rgba(231, 76, 60, 0.1);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        #contact form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #contact input,
+        #contact textarea {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        #contact input:focus,
+        #contact textarea:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.1);
+        }
+
+        #contact textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        #contact button {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        #contact button:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.2);
+        }
+    </style>
 </body>
 </html>

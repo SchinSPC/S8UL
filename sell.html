@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Your Product - BLEND S8UL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .sell-form {
+            max-width: 600px;
+            margin: 150px auto 50px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+            top: 20px;
+        }
+        .sell-form h2 {
+            margin-top: 20px;
+            padding-top: 20px;
+            position: relative;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .submit-btn {
+            background: #000;
+            color: #fff;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .submit-btn:hover {
+            background: #333;
+        }
+        .verification-notice {
+            margin-top: 40px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-left: 4px solid #e74c3c;
+            border-radius: 8px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .notice-icon {
+            font-size: 32px;
+            color: #e74c3c;
+            font-weight: bold;
+            line-height: 1;
+        }
+        .notice-content {
+            flex: 1;
+        }
+        .notice-content h3 {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .notice-content p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .notice-content .timeline {
+            color: #e74c3c;
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-top: 15px;
+        }
+        .requirements-notice {
+            background: #fff3f3;
+            border: 1px solid #e74c3c;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .requirements-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .requirements-icon {
+            font-size: 24px;
+        }
+        .requirements-header h3 {
+            color: #e74c3c;
+            font-size: 1.3rem;
+            margin: 0;
+        }
+        .requirements-content {
+            color: #333;
+        }
+        .requirements-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .requirements-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 15px 0;
+        }
+        .requirements-content ul li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        .requirements-content ul li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #e74c3c;
+        }
+        .requirements-note {
+            font-weight: 500;
+            color: #e74c3c;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ffcdd2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../assets/logo1.png" alt="BLEND S8UL">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="../cart.html" class="cart-icon">Cart (<span id="cart-count">0</span>) - ₹<span id="cart-total">0</span>)</a></li>
+                    <li><a href="sell.html" class="sell-button">Sell</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="sell-form">
+        <h2>Sell Your Product</h2>
+        
+        <!-- Requirements Notice -->
+        <div class="requirements-notice">
+            <div class="requirements-header">
+                <i class="requirements-icon">ℹ️</i>
+                <h3>Important Requirements</h3>
+            </div>
+            <div class="requirements-content">
+                <p>We only accept raw products without any existing branding. If your product meets our quality standards, we will:</p>
+                <ul>
+                    <li>Apply our BLEND S8UL branding</li>
+                    <li>List it on our platform</li>
+                    <li>Maintain sufficient stock levels</li>
+                </ul>
+                <p class="requirements-note">Please ensure your product meets our quality standards before submission.</p>
+            </div>
+        </div>
+
+        <form id="productForm" onsubmit="return handleSubmit(event)">
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" id="productName" name="productName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="productPrice">Price (₹)</label>
+                <input type="number" id="productPrice" name="productPrice" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="productCategory">Category</label>
+                <select id="productCategory" name="productCategory" required>
+                    <option value="">Select Category</option>
+                    <option value="hoodie">Hoodie</option>
+                    <option value="tshirt">T-Shirt</option>
+                    <option value="cap">Cap</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="productDescription">Product Description</label>
+                <textarea id="productDescription" name="productDescription" rows="4" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="productImage">Product Image</label>
+                <input type="file" id="productImage" name="productImage" accept="image/*" required>
+            </div>
+            
+            <button type="submit" class="submit-btn">Submit Product</button>
+        </form>
+
+        <!-- Verification Notice -->
+        <div class="verification-notice">
+            <div class="notice-icon">*</div>
+            <div class="notice-content">
+                <h3>Quality Verification Process</h3>
+                <p>All submitted products undergo a comprehensive quality assessment by our expert verification team. We meticulously evaluate each item to ensure it meets our stringent standards for authenticity, quality, and brand alignment. Your product will be thoroughly inspected for:</p>
+                <ul style="list-style-type: none; padding-left: 0; margin: 10px 0;">
+                    <li>✓ Material Quality</li>
+                    <li>✓ Design Authenticity</li>
+                    <li>✓ Brand Compliance</li>
+                    <li>✓ Product Condition</li>
+                </ul>
+                <p class="timeline">Our team will review your submission and provide a detailed response within 5-6 working days.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Get form values
+            const productName = document.getElementById('productName').value;
+            const productPrice = document.getElementById('productPrice').value;
+            const productCategory = document.getElementById('productCategory').value;
+            const productDescription = document.getElementById('productDescription').value;
+            
+            // Here you would typically send this data to your backend
+            // For now, we'll just show an alert
+            alert('Product submitted successfully! We will review it shortly.');
+            
+            // Reset the form
+            event.target.reset();
+            
+            return false;
+        }
+    </script>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay">
+        <div class="loading-hoodie"></div>
+    </div>
+
+    <script>
+        // Add loading animation for page transitions
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            const links = document.querySelectorAll('a[href]:not([href^="#"])');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Don't show loading for external links
+                    if (this.hostname !== window.location.hostname) return;
+                    
+                    e.preventDefault();
+                    const targetUrl = this.href;
+                    
+                    // Show loading overlay
+                    loadingOverlay.classList.add('active');
+                    
+                    // Simulate loading time (1 second)
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 1000);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
