@@ -16,11 +16,12 @@
             </div>
             <nav>
                 <ul>
-                    <li><a  href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../shop.html">Shop</a></li>
+                    <li><a href="../cart.html" class="cart-icon">Cart (<span id="cart-count">0</span>) - ₹<span id="cart-total">0</span></a></li>
+                    <li><a href="../sell.html" class="sell-button">Sell</a></li>
                     <li><a class="active" href="about.html">About Us</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a href="../cart.html" class="cart-icon">Cart (<span id="cart-count">0</span>) - ₹<span id="cart-total">0</span></a></li>
                 </ul>
             </nav>
         </div>
@@ -28,8 +29,19 @@
     
     <!-- About Section -->
  <section id="about">
-    <h2>About BLEND S8UL</h2>
-    <p>BLEND S8UL is a premium clothing brand that combines style, comfort, and quality. Our mission is to provide high-quality apparel that reflects your unique personality and lifestyle. Each piece in our collection is carefully crafted with attention to detail and made from the finest materials.DESIGNED BY SACHIN SPC </p>
+    <h2>
+        
+        
+        
+        [About us]      
+
+        
+        BLEND S8UL
+    
+    
+    
+    </h2>
+    <p>                               BLEND S8UL is a premium clothing brand that combines style, comfort, and quality. Our mission is to provide high-quality apparel that reflects your unique personality and lifestyle. Each piece in our collection is carefully crafted with attention to detail and made from the finest materials.DESIGNED BY SACHIN SPC </p>
 </section>
 
 <!-- Footer -->
@@ -37,6 +49,71 @@
     <p>&copy; 2025 BLEND S8UL. All rights reserved.</p>
 </footer>
 
+<!-- Loading Overlay -->
+<div class="loading-overlay">
+    <div class="loading-hoodie"></div>
+</div>
+
 <script src="../script.js"></script>
+<script>
+    // Add loading animation for page transitions
+    document.addEventListener('DOMContentLoaded', function() {
+        const loadingOverlay = document.querySelector('.loading-overlay');
+        const links = document.querySelectorAll('a[href]:not([href^="#"])');
+        
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Don't show loading for external links
+                if (this.hostname !== window.location.hostname) return;
+                
+                // Special handling for Sell button
+                if (this.classList.contains('sell-button')) {
+                    e.preventDefault();
+                    showSellerPopup(this.href);
+                    return;
+                }
+                
+                e.preventDefault();
+                const targetUrl = this.href;
+                
+                // Show loading overlay
+                loadingOverlay.classList.add('active');
+                
+                // Simulate loading time (1 second)
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 1000);
+            });
+        });
+    });
+
+    let pendingSellUrl = '';
+
+    function showSellerPopup(url) {
+        pendingSellUrl = url;
+        const popup = document.getElementById('sellerPopup');
+        popup.classList.add('active');
+    }
+
+    function handleSellerConfirm() {
+        const popup = document.getElementById('sellerPopup');
+        popup.classList.remove('active');
+        
+        // Show loading overlay
+        const loadingOverlay = document.querySelector('.loading-overlay');
+        loadingOverlay.classList.add('active');
+        
+        // Simulate loading time (1 second)
+        setTimeout(() => {
+            window.location.href = pendingSellUrl;
+        }, 1000);
+    }
+
+    function handleSellerCancel() {
+        const popup = document.getElementById('sellerPopup');
+        popup.classList.remove('active');
+        pendingSellUrl = '';
+    }
+</script>
 </body>
 </html>

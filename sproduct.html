@@ -29,7 +29,22 @@
     <section id="prodetails" class="section-p1">
         <div class="single-pro-image">
             <img src="assets/products/9.jpg" width="100%" id="MainImg" alt="">
+            <div class="small-image-group">
+                <div class="small-image-col">
+                    <img src="assets/products/9.jpg" width="100%" class="small-img">
+                </div>  
+                <div class="small-image-col">
+                    <img src="assets/products/9.2.jpg" width="100%" class="small-img">
+                </div>  
+                <div class="small-image-col">
+                    <img src="assets/products/9.3.jpg" width="100%" class="small-img">
+                </div>  
+                <div class="small-image-col">
+                    <img src="assets/products/9.4.jpg" width="100%" class="small-img">
+                </div>  
+            </div>
         </div>
+
         <div class="single-pro-details">
             <h5>S8UL</h5>
             <h3>Man Hoodie</h3>
@@ -41,7 +56,7 @@
                 <option>Large</option>
                 <option>XL</option>
             </select>
-            <button class="cta-button">Add Cart</button>
+            <button onclick="addToCart('hoodie', 'Man Hoodie', 999)" class="cta-button">Add Cart</button>
         </div>
     </section>
 
@@ -49,6 +64,28 @@
     <footer>
         <p>&copy; 2025 BLEND S8UL. All rights reserved.</p>
     </footer>
+
+    <script>
+        var MainImg = document.getElementById("MainImg");
+        var smallimg = document.getElementsByClassName("small-img");
+
+        smallimg[0].onclick = function(){
+            MainImg.src = smallimg[0].src;
+        }
+
+        smallimg[1].onclick = function(){
+            MainImg.src = smallimg[1].src;
+        }
+
+        smallimg[2].onclick = function(){
+            MainImg.src = smallimg[2].src;
+        }
+
+        smallimg[3].onclick = function(){
+            MainImg.src = smallimg[3].src;
+        }
+
+    </script>
 
     <script src="../script.js"></script>
 </body>

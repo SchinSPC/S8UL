@@ -27,7 +27,7 @@ header {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: fixed;
     width: 100%;
-    top: 0;
+    top:0;
     z-index: 1000;
     padding: 1rem 10;
 }
@@ -42,8 +42,8 @@ header .container {
 }
 
 .logo img {
-    height: 80px;
-    width: 120px;
+    /* height: 0px; */
+    width: 100px;
     object-fit:cover;
     transition: var(--transition);
 }
@@ -52,67 +52,83 @@ header .container {
     transform: scale(1.05);
 }
 
-nav ul {
+/* Navigation Styles */
+nav {
     display: flex;
-    list-style: none;
-    gap: 2rem;
+    justify-content: center;
     align-items: center;
+    flex: 1;
 }
 
-nav a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: var(--transition);
+nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
     position: relative;
 }
 
-nav li a.active {
-    color:#e74c3c ;
+nav ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-nav a:hover {
-    color: var(--secondary-color);
-    background-color: rgba(231, 76, 60, 0.1);
+nav ul li a:hover {
+    color: #e74c3c;
 }
 
-nav a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: var(--secondary-color);
-    transition: var(--transition);
+nav ul li a.active {
+    color: #e74c3c;
 }
 
-nav a:hover::after {
+/* Header Container */
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
     width: 100%;
 }
 
+/* Logo Styles */
+.logo {
+    flex: 0 0 auto;
+    margin-right: 2rem;
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+}
+
+/* Cart Icon Styles */
 .cart-icon {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: var(--secondary-color);
-    color: var(--white);
     padding: 0.5rem 1rem;
+    background-color: #f8f9fa;
     border-radius: 4px;
-    transition: var(--transition);
-    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 .cart-icon:hover {
-    background-color: #c0392b;
+    background-color: #e9ecef;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.cart-icon::after {
-    display: none;
 }
 
 /* Hero Section */
@@ -191,6 +207,7 @@ nav a:hover::after {
     gap: 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    margin-top: 3rem;
 }
 
 .product-card {
@@ -247,7 +264,7 @@ nav a:hover::after {
 }
 
 #page-header h2,
-#page-header p{
+#page-header h4{
     color: #000000;
 
 }
@@ -316,9 +333,21 @@ nav a:hover::after {
 }
 
 #prodetails .single-pro-image{
-    width: 40%;
+    width: 30%;
     margin-right: 50px;
+    margin-left: 20px;
+    margin-top: 100px;
 
+}
+
+.small-image-group{
+    display: flex;
+    justify-content: space-between;
+}
+
+.small-image-col{
+    flex-basis: 24%;
+    cursor: pointer;
 }
 
 #prodetails .single-pro-details input{
@@ -341,6 +370,7 @@ nav a:hover::after {
 #about h2 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
+    margin-top: 3rem;
     color: var(--primary-color);
 }
 
@@ -361,6 +391,7 @@ nav a:hover::after {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 3rem;
+    margin-top: 3rem;
     color: var(--primary-color);
 }
 
@@ -467,5 +498,334 @@ footer {
 
     .product-card img {
         height: 250px;
+    }
+}
+
+/* Loading Animation */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    /* Debug border */
+    border: 2px solid red;
+}
+
+.loading-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-hoodie {
+    width: 200px;
+    height: 200px;
+    background-image: url('../assets/logo1.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: rotateHoodie 2s linear infinite;
+    position: relative;
+    display: block;
+    /* Debug border */
+    border: 2px solid blue;
+}
+
+.loading-hoodie::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+    z-index: -1;
+    /* Debug border */
+    border: 2px solid green;
+}
+
+@keyframes rotateHoodie {
+    0% { 
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.1);
+    }
+    100% { 
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+/* Sell Button Styles */
+.sell-button {
+    background-color: #e74c3c;
+    color: white !important;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.sell-button:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sell-button::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+
+.sell-button:hover::after {
+    width: 100%;
+}
+
+/* Popup Overlay Styles */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.custom-popup {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.popup-overlay.active .custom-popup {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.popup-logo {
+    width: 80px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.popup-title {
+    color: #e74c3c;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.popup-message {
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.popup-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.popup-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.popup-btn.confirm {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.popup-btn.cancel {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.popup-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Add transition to all links */
+a {
+    transition: color 0.3s ease;
+}
+
+/* Add transition to buttons */
+button {
+    transition: background-color 0.3s ease;
+}
+
+/* Sell Page Styles */
+#sell {
+    padding: 150px 20px 5rem;  /* Increased top padding from 120px to 150px */
+    background-color: var(--light-gray);
+    min-height: 100vh;
+    margin-top: 20px;  /* Added margin-top for extra spacing */
+}
+
+#sell h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+    position: relative;
+    padding-top: 20px;  /* Added padding-top to the heading */
+}
+
+#sell h2::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background-color: var(--secondary-color);
+    margin: 1rem auto;
+}
+
+#sell form {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#sell .form-group {
+    margin-bottom: 1.5rem;
+}
+
+#sell label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+#sell input,
+#sell select,
+#sell textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+#sell input:focus,
+#sell select:focus,
+#sell textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.1);
+}
+
+#sell textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+#sell button {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+}
+
+#sell button:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Seller Verification Notice */
+.seller-notice {
+    background-color: #f8f9fa;
+    border-left: 4px solid var(--secondary-color);
+    padding: 1.5rem;
+    margin: 2rem 0;  /* Adjusted margin to be more consistent */
+    border-radius: 4px;
+    position: relative;  /* Added position relative */
+    top: 20px;  /* Added top offset */
+}
+
+.seller-notice h3 {
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.seller-notice p {
+    color: var(--text-color);
+    margin-bottom: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Responsive adjustments for sell page */
+@media (max-width: 768px) {
+    #sell {
+        padding: 130px 15px 3rem;  /* Increased top padding for tablets */
+    }
+
+    #sell form {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #sell {
+        padding: 120px 10px 2rem;  /* Increased top padding for mobile */
+    }
+
+    #sell form {
+        padding: 1rem;
     }
 }
